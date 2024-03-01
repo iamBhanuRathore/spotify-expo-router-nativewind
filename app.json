@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "orientation": "default",
+    "web": {
+      "output": "static",
+      "bundler": "metro"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://n"
+        }
+      ]
+    ],
+    "name": "spotify-expo-router-nativewind",
+    "slug": "spotify-expo-router-nativewind",
+    "experments": {
+      "typedRoutes": true
+    },
+    "userInterfaceStyle": "automatic"
+  }
+}
