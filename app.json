@@ -19,6 +19,13 @@
     "experments": {
       "typedRoutes": true
     },
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "android": {
+      "package": "com.bhanurathore.spotifyexporouternativewind"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bhanurathore.spotifyexporouternativewind"
+    }
   }
 }

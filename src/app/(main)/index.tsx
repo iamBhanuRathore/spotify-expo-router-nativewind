@@ -1,9 +1,31 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { Link } from "expo-router";
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { Alert, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Page() {
+  // const { isPending, isError, data, error } = useQuery({
+  //   queryKey: ["todos"],
+  //   // queryFn: fetchTodoList,
+  // });
+  useEffect(() => {
+    const func = async () => {
+      const accessToken = await AsyncStorage.getItem("authToken");
+      Alert.alert(accessToken);
+      axios
+        .get("https://api.spotify.com/v1/me", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => console.log(res.data))
+        .catch((error) => console.error(JSON.stringify(error)));
+    };
+    func();
+  }, []);
   return (
     <View className="flex flex-1">
       <Header />

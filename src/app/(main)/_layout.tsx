@@ -37,10 +37,10 @@ export default function TabLayout() {
             ),
           // <TabBarIcon name="home" color={color} />
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link className="pr-5" href="/modal" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <AntDesign name="codepen" />
+                  <AntDesign name="codepen" size={28} />
                   // <FontAwesome
                   //   name="info-circle"
                   //   size={25}

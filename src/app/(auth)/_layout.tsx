@@ -2,6 +2,7 @@ import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Stack, Tabs } from "expo-router";
 import { Pressable, Text } from "react-native";
+import { useUser } from "@/components/providers/auth-provider";
 
 // import Colors from "@/constants/Colors";
 // import { useColorScheme } from "@/components/useColorScheme";
@@ -16,6 +17,8 @@ import { Pressable, Text } from "react-native";
 // }
 
 export default function AuthLayout() {
+  const { user } = useUser();
+  console.log({ user });
   // const colorScheme = useColorScheme();
 
   return (
