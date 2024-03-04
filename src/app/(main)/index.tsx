@@ -1,31 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { Link } from "expo-router";
-import React, { useEffect } from "react";
-import { Alert, Text, View } from "react-native";
+
+import { Link, router } from "expo-router";
+import React from "react";
+import { Alert, Button, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Page() {
-  // const { isPending, isError, data, error } = useQuery({
-  //   queryKey: ["todos"],
-  //   // queryFn: fetchTodoList,
-  // });
-  // useEffect(() => {
-  //   const func = async () => {
-  //     const accessToken = await AsyncStorage.getItem("authToken");
-  //     Alert.alert(accessToken);
-  //     axios
-  //       .get("https://api.spotify.com/v1/me", {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       })
-  //       .then((res) => console.log(res.data))
-  //       .catch((error) => console.error(JSON.stringify(error)));
-  //   };
-  //   func();
-  // }, []);
   return (
     <View className="flex flex-1">
       <Header />
@@ -36,6 +16,11 @@ export default function Page() {
 }
 
 function Content() {
+  const handleLogout = async () => {
+    // Alert.alert("Logout");
+    await AsyncStorage.removeItem("authToken");
+    router.navigate("/login");
+  };
   return (
     <View className="flex-1">
       <View className="py-12 md:py-24 lg:py-32 xl:py-48">
@@ -49,14 +34,8 @@ function Content() {
             <Text className="mx-auto max-w-[700px] text-lg text-center text-gray-500 md:text-xl dark:text-gray-400">
               Discover and collaborate on amce. Explore our services now.
             </Text>
-
             <View className="gap-4">
-              <Link
-                suppressHighlighting
-                className="flex h-9 items-center justify-center overflow-hidden rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50  transition-colors hover:bg-gray-900/90 active:bg-gray-400/90 web:focus-visible:outline-none web:focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                href="#">
-                Explore
-              </Link>
+              <Button title="Logout" onPress={handleLogout} />
             </View>
           </View>
         </View>
@@ -109,16 +88,3 @@ function Footer() {
     </View>
   );
 }
-const a = {
-  response: {
-    authentication: null,
-    error: null,
-    errorCode: null,
-    params: {
-      code: "AQAbubIenOKqJYm5p1dmz4JGSToE2F027pNcudYi7t5GtgtrkbXImRtkkFk35tWEM-C3Bpc-ln7cbJTNjmGeKrQ2QN6u3Y7CQtgMDdbzp-arqs4qCBZD2LX1GkbzibS-kcQ-jn7W4A6yydFjp5rrjF-fR9fy-6Puo30MyqXoXEADKl6G4xAEsgsjQ5a0qI_xU2ZpmjyFsndE84rnlavZIR9qp-VS5iN_NgQQlP7ieI4vAVEFFavusWolP6EBdduP2aMF71Ic8hSS4rjjvzuBHfGMmQKD_HFTMDJVixWCngmhm8PVkzIYl9dwQrLC2kWJmY4NQksxRQzW__YtXEKZQngWxEvtli4pGO5oRtNNLeZcMjeQFjUMtfPalk9tv-kKGg",
-      state: "gMwvYbPFa9",
-    },
-    type: "success",
-    url: "exp://192.168.90.196:8081/--/(main)?code=AQAbubIenOKqJYm5p1dmz4JGSToE2F027pNcudYi7t5GtgtrkbXImRtkkFk35tWEM-C3Bpc-ln7cbJTNjmGeKrQ2QN6u3Y7CQtgMDdbzp-arqs4qCBZD2LX1GkbzibS-kcQ-jn7W4A6yydFjp5rrjF-fR9fy-6Puo30MyqXoXEADKl6G4xAEsgsjQ5a0qI_xU2ZpmjyFsndE84rnlavZIR9qp-VS5iN_NgQQlP7ieI4vAVEFFavusWolP6EBdduP2aMF71Ic8hSS4rjjvzuBHfGMmQKD_HFTMDJVixWCngmhm8PVkzIYl9dwQrLC2kWJmY4NQksxRQzW__YtXEKZQngWxEvtli4pGO5oRtNNLeZcMjeQFjUMtfPalk9tv-kKGg&state=gMwvYbPFa9",
-  },
-};

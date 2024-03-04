@@ -66,7 +66,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       setUser({
         id: "1234",
         playlists: ["Playlist"],
-        username: "BHanu",
+        username: "Bhanu",
       });
     } catch (error) {
       console.error(error);

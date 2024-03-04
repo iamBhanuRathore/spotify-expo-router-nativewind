@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
-import { Link, Tabs } from "expo-router";
+import { Link, Tabs, router } from "expo-router";
 import { Pressable } from "react-native";
-
-// import Colors from "@/constants/Colors";
-// import { useColorScheme } from "@/components/useColorScheme";
-// import { useClientOnlyValue } from "@/components/useClientOnlyValue";
-
-// // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+import { useGetToken } from "@/services/queries";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TabLayout() {
-  // const colorScheme = useColorScheme();
-
+  const [authorizationCode, setAuthorizationCode] = useState("");
+  const { data, isError, isLoading, isSuccess } =
+    useGetToken(authorizationCode);
+  useEffect(() => {
+    const init = async () => {
+      const token = await AsyncStorage.getItem("authToken");
+      if (!token) {
+        router.navigate("/login");
+      }
+      setAuthorizationCode(token);
+    };
+    init();
+  }, []);
+  const afterSuccessGetToken = async () => {
+    console.log(data);
+  };
+  const afterErrorGetToken = async () => {};
+  useEffect(() => {
+    console.log({ isError, isSuccess, isLoading, data });
+    if (isSuccess) {
+      afterSuccessGetToken();
+    }
+    if (isError) {
+      afterErrorGetToken();
+    }
+  }, [isSuccess, isError, isLoading, data]);
   return (
-    <Tabs
-      screenOptions={
-        {
-          // tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-          // Disable the static render of the header on web
-          // to prevent a hydration error in React Navigation v6.
-          // headerShown: useClientOnlyValue(false, true),
-        }
-      }>
+    <Tabs>
       <Tabs.Screen
         name="index"
         options={{

@@ -11,15 +11,15 @@ const redirectUri = makeRedirectUri({
 
 // get token - if authorization token is present
 export const useGetToken = (authorizationCode: string) => {
-  const clientId = process.env.SPOTIFY_CLIENT_ID; // Replace with your client ID
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET; // Replace with your client secret
-
+  const clientId =
+    "a9c371842776484c9202086d65d111d2" || process.env.SPOTIFY_CLIENT_ID; // Replace with your client ID
+  const clientSecret =
+    "ed35bfb8f6f94bc2ad5b136aea4d1bce" || process.env.SPOTIFY_CLIENT_SECRET; // Replace with your client secret
   const encodedCredentials = Buffer.from(
     `${clientId}:${clientSecret}`
   ).toString("base64");
-
   const authorizationHeader = `Basic ${encodedCredentials}`;
-
+  console.log(authorizationHeader);
   return useQuery({
     queryKey: ["spotifyToken"],
     queryFn: async () => {
@@ -42,7 +42,7 @@ export const useGetToken = (authorizationCode: string) => {
         throw new Error("Failed to fetch token");
       }
 
-      return response.data.access_token;
+      return response.data;
     },
     enabled: !!authorizationCode, // Only fetch when authorizationCode is available
   });
