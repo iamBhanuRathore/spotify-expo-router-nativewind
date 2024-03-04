@@ -6,7 +6,6 @@ import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 WebBrowser.maybeCompleteAuthSession();
 const discovery = {
   authorizationEndpoint: "https://accounts.spotify.com/authorize",
@@ -15,9 +14,11 @@ const discovery = {
 export default function LoginScreen() {
   const clientId =
     "a9c371842776484c9202086d65d111d2" || process.env.SPOTIFY_CLIENT_ID;
+  const clientSecret =
+    "ed35bfb8f6f94bc2ad5b136aea4d1bce" || process.env.SPOTIFY_CLIENT_SECRET;
   const redirectUri = makeRedirectUri({
     scheme: "acme",
-    path: "(main)",
+    path: "/(main)",
   });
   const [_, __, promptAsync] = useAuthRequest(
     {
@@ -33,7 +34,7 @@ export default function LoginScreen() {
       ],
       // To follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
-      usePKCE: false,
+      usePKCE: true,
       responseType: "code",
       redirectUri,
     },
@@ -51,9 +52,8 @@ export default function LoginScreen() {
   const login = async () => {
     try {
       const data = await promptAsync();
-      console.log("promptAsync", data);
+      // console.log("Authorize Token", data);
       if (data.type === "success") {
-        console.log("code", data.params.code);
         await AsyncStorage.setItem("authToken", data.params.code);
         router.navigate("/");
       }
