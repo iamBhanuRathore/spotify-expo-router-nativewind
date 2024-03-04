@@ -11,21 +11,21 @@ export default function Page() {
   //   queryKey: ["todos"],
   //   // queryFn: fetchTodoList,
   // });
-  useEffect(() => {
-    const func = async () => {
-      const accessToken = await AsyncStorage.getItem("authToken");
-      Alert.alert(accessToken);
-      axios
-        .get("https://api.spotify.com/v1/me", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((res) => console.log(res.data))
-        .catch((error) => console.error(JSON.stringify(error)));
-    };
-    func();
-  }, []);
+  // useEffect(() => {
+  //   const func = async () => {
+  //     const accessToken = await AsyncStorage.getItem("authToken");
+  //     Alert.alert(accessToken);
+  //     axios
+  //       .get("https://api.spotify.com/v1/me", {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       })
+  //       .then((res) => console.log(res.data))
+  //       .catch((error) => console.error(JSON.stringify(error)));
+  //   };
+  //   func();
+  // }, []);
   return (
     <View className="flex flex-1">
       <Header />
@@ -109,3 +109,16 @@ function Footer() {
     </View>
   );
 }
+const a = {
+  response: {
+    authentication: null,
+    error: null,
+    errorCode: null,
+    params: {
+      code: "AQAbubIenOKqJYm5p1dmz4JGSToE2F027pNcudYi7t5GtgtrkbXImRtkkFk35tWEM-C3Bpc-ln7cbJTNjmGeKrQ2QN6u3Y7CQtgMDdbzp-arqs4qCBZD2LX1GkbzibS-kcQ-jn7W4A6yydFjp5rrjF-fR9fy-6Puo30MyqXoXEADKl6G4xAEsgsjQ5a0qI_xU2ZpmjyFsndE84rnlavZIR9qp-VS5iN_NgQQlP7ieI4vAVEFFavusWolP6EBdduP2aMF71Ic8hSS4rjjvzuBHfGMmQKD_HFTMDJVixWCngmhm8PVkzIYl9dwQrLC2kWJmY4NQksxRQzW__YtXEKZQngWxEvtli4pGO5oRtNNLeZcMjeQFjUMtfPalk9tv-kKGg",
+      state: "gMwvYbPFa9",
+    },
+    type: "success",
+    url: "exp://192.168.90.196:8081/--/(main)?code=AQAbubIenOKqJYm5p1dmz4JGSToE2F027pNcudYi7t5GtgtrkbXImRtkkFk35tWEM-C3Bpc-ln7cbJTNjmGeKrQ2QN6u3Y7CQtgMDdbzp-arqs4qCBZD2LX1GkbzibS-kcQ-jn7W4A6yydFjp5rrjF-fR9fy-6Puo30MyqXoXEADKl6G4xAEsgsjQ5a0qI_xU2ZpmjyFsndE84rnlavZIR9qp-VS5iN_NgQQlP7ieI4vAVEFFavusWolP6EBdduP2aMF71Ic8hSS4rjjvzuBHfGMmQKD_HFTMDJVixWCngmhm8PVkzIYl9dwQrLC2kWJmY4NQksxRQzW__YtXEKZQngWxEvtli4pGO5oRtNNLeZcMjeQFjUMtfPalk9tv-kKGg&state=gMwvYbPFa9",
+  },
+};

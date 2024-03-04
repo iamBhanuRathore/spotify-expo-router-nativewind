@@ -17,8 +17,8 @@ import { useUser } from "@/components/providers/auth-provider";
 // }
 
 export default function AuthLayout() {
-  const { user } = useUser();
-  console.log({ user });
+  // const { user } = useUser();
+  // console.log({ user });
   // const colorScheme = useColorScheme();
 
   return (
