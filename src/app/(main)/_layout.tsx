@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
 import { Link, Tabs, router } from "expo-router";
-import { Pressable } from "react-native";
+import { Pressable, Text } from "react-native";
 import { useGetToken } from "@/services/queries";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -13,20 +13,29 @@ export default function TabLayout() {
     useGetToken(authorizationCode);
   useEffect(() => {
     const init = async () => {
+      // runs only first time when we have the authToken
       const token = await AsyncStorage.getItem("authToken");
-      if (!token) {
-        router.navigate("/login");
+      if (token) {
+        console.log("First time after Login");
+        setAuthorizationCode(token);
       }
-      setAuthorizationCode(token);
     };
     init();
   }, []);
   const afterSuccessGetToken = async () => {
-    console.log("Login Success");
     if (data.access_token) {
+      console.log("Getting Access token with the exchange of authToken");
+      await AsyncStorage.removeItem("authToken");
       await AsyncStorage.setItem("accessToken", data.access_token);
       await AsyncStorage.setItem("refreshToken", data.refresh_token);
       await AsyncStorage.setItem("expirationTime", String(data.expires_in));
+    }
+    if (data.error) {
+      console.log(
+        "Getting error on exchange of the accessToken with the authToken"
+      );
+      await AsyncStorage.clear();
+      router.navigate("/login");
     }
   };
   const afterErrorGetToken = async () => {};
@@ -39,6 +48,9 @@ export default function TabLayout() {
       afterErrorGetToken();
     }
   }, [isSuccess, isError, isLoading, data]);
+  if (isLoading) {
+    return <Text>Loading</Text>;
+  }
   return (
     <Tabs
       screenOptions={{
@@ -111,44 +123,3 @@ let a = {
     "playlist-read-private playlist-read-collaborative user-library-read playlist-modify-public user-read-email user-read-recently-played user-top-read",
   token_type: "Bearer",
 };
-
-// Replace refresh token with the access token
-
-// import axios from 'axios';
-
-// const refreshToken = 'YOUR_REFRESH_TOKEN'; // Replace with your stored refresh token
-// const clientId = process.env.SPOTIFY_CLIENT_ID; // Replace with your client ID
-// const clientSecret = process.env.SPOTIFY_CLIENT_SECRET; // Replace with your client secret
-
-// const refreshAccessToken = async () => {
-//   try {
-//     const response = await axios.post(
-//       'https://accounts.spotify.com/api/token',
-//       {
-//         grant_type: 'refresh_token',
-//         refresh_token,
-//       },
-//       {
-//         headers: {
-//           'Content-Type': 'application/x-www-form-urlencoded',
-//           ...(clientId && clientSecret
-//             ? {
-//                 Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
-//               }
-//             : {}), // Include Authorization header if using Client Credentials Flow
-//         },
-//       }
-//     );
-
-//     const newAccessToken = response.data.access_token;
-//     const newRefreshToken = response.data.refresh_token; // Optional: update if present
-
-//     // Update your stored access and refresh tokens (if applicable)
-//     // ...
-
-//     return newAccessToken;
-//   } catch (error) {
-//     console.error('Error refreshing access token:', error);
-//     // Handle errors appropriately
-//   }
-// };

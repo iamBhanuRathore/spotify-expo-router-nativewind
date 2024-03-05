@@ -18,9 +18,9 @@ export default function LoginScreen() {
     "ed35bfb8f6f94bc2ad5b136aea4d1bce" || process.env.SPOTIFY_CLIENT_SECRET;
   const redirectUri = makeRedirectUri({
     scheme: "acme",
-    path: "/(main)",
+    path: "(main)",
   });
-  const [_, __, promptAsync] = useAuthRequest(
+  const [request, response, promptAsync] = useAuthRequest(
     {
       clientId,
       scopes: [
@@ -34,7 +34,7 @@ export default function LoginScreen() {
       ],
       // To follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
-      usePKCE: true,
+      usePKCE: false,
       responseType: "code",
       redirectUri,
     },
@@ -42,20 +42,22 @@ export default function LoginScreen() {
   );
   useEffect(() => {
     const init = async () => {
-      const token = await AsyncStorage.getItem("authToken");
+      const token = await AsyncStorage.getItem("accessToken");
       if (token) {
+        console.log("Already access token on login page");
         router.navigate("(main)");
       }
     };
     init();
-  }, []);
+  }, [response]);
   const login = async () => {
     try {
       const data = await promptAsync();
       // console.log("Authorize Token", data);
       if (data.type === "success") {
+        console.log("Login Success");
         await AsyncStorage.setItem("authToken", data.params.code);
-        router.navigate("/");
+        router.navigate("(main)");
       }
     } catch (error) {
       console.error("Login error:", error);

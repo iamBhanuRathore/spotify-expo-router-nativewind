@@ -15,11 +15,9 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function Page() {
-  const { data, isError, isLoading } = useUser();
-  console.log("User Detail", data, isError, isLoading);
   const handleLogout = async () => {
     // Alert.alert("Logout");
-    await AsyncStorage.removeItem("authToken");
+    await AsyncStorage.clear();
     router.navigate("/login");
   };
   return (

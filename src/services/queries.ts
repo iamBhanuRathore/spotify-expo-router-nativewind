@@ -8,7 +8,7 @@ const AUTH_BASE_URL = "https://accounts.spotify.com/api";
 const USER_BASE_URL = "https://api.spotify.com/v1";
 const redirectUri = makeRedirectUri({
   scheme: "acme",
-  path: "/(main)",
+  path: "(main)",
 });
 const clientId =
   "a9c371842776484c9202086d65d111d2" || process.env.SPOTIFY_CLIENT_ID; // Replace with your client ID
