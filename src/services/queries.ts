@@ -55,7 +55,26 @@ export const useUser = () => {
         },
       });
       const tokenData = await tokenResponse.json();
-      return tokenData as UserType;
+      return tokenData;
+      // return tokenData as UserType;
+    },
+  });
+};
+export const useRecentPlayedSongs = () => {
+  return useQuery({
+    queryKey: ["recentPlayed"],
+    queryFn: async () => {
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      const tokenResponse = await fetch(
+        `${USER_BASE_URL}/me/player/recently-played`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const tokenData = await tokenResponse.json();
+      return tokenData;
     },
   });
 };
