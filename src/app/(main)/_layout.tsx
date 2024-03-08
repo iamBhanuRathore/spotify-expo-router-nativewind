@@ -124,14 +124,3 @@ export default function TabLayout() {
     </>
   );
 }
-
-let a = {
-  access_token:
-    "BQBeQVG0Cs6vMa07vLKTUUVmF9jwwJsg5HiudhSYPPRRfBBP3p898br2_CDXx-ATK37ijUE0iIbK665JibJeKBtECJZLcYE1wcpq4y6ZA474C8PIPB6nU5NSni3xbJXBPXeG52CBTdlVqAnJWpbAFoz0O44r6EWPdx9WXnf02IJU_NgkVs0B2ZRjvsAYxF9d_t_TWLZodTxQE3PNzqkm50LeLhpxthNsdLJ997U9lyUmzxi2r7XUC01dk8Uhyzt7VS9CCti1",
-  expires_in: 3600,
-  refresh_token:
-    "AQBv7Z-TtK_4JA75Dro8nmDexLhPqMUKGKZhXIdAI7LO4IOO8LTDFfyLd_IGgTCp0cBsyKlwVq7zwH4l2m-HHYkmfGyfnsi1F-NSCeGCxuAZNR4mgO88XqFuFx6AW2TUpEA",
-  scope:
-    "playlist-read-private playlist-read-collaborative user-library-read playlist-modify-public user-read-email user-read-recently-played user-top-read",
-  token_type: "Bearer",
-};

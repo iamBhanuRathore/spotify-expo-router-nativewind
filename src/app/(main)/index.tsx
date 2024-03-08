@@ -1,5 +1,6 @@
 import LikebarComponent from "@/components/likebar-component";
 import RecentPlayed from "@/components/recent-played";
+import GetTopItems from "@/components/top-items-component";
 import UserAvatar from "@/components/user-avatar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { FlashList } from "@shopify/flash-list";
@@ -97,6 +98,9 @@ export default function Page() {
           {/* Recent Played Component  */}
           <RecentPlayed />
           {/* Recent Played Component  */}
+          {/* GetTopItems GetTopItems Component  */}
+          <GetTopItems type="artists" />
+          {/* GetTopItems GetTopItems Component  */}
           {/* </View> */}
         </ScrollView>
         {/* <Button title="Logout" onPress={handleLogout} /> */}

@@ -66,13 +66,28 @@ export const useRecentPlayedSongs = () => {
     queryFn: async () => {
       const accessToken = await AsyncStorage.getItem("accessToken");
       const tokenResponse = await fetch(
-        `${USER_BASE_URL}/me/player/recently-played`,
+        `${USER_BASE_URL}/me/player/recently-played?limit=4`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
+      const tokenData = await tokenResponse.json();
+      return tokenData;
+    },
+  });
+};
+export const useGetUsersTopItems = (type: "artists" | "tracks") => {
+  return useQuery({
+    queryKey: ["topArtists"],
+    queryFn: async () => {
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      const tokenResponse = await fetch(`${USER_BASE_URL}/me/top/${type}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       const tokenData = await tokenResponse.json();
       return tokenData;
     },

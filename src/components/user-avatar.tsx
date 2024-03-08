@@ -26,6 +26,9 @@ const UserAvatar = ({ className }: Props) => {
     };
     init();
   }, [data?.error?.status]); // Listen to status change instead of message change
+  if (data?.error?.status === 401) {
+    return null;
+  }
   return (
     <SafeAreaView
       className={cn(
