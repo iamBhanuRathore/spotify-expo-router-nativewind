@@ -24,6 +24,10 @@ export default function LoginScreen() {
     {
       clientId,
       scopes: [
+        "ugc-image-upload",
+        "user-read-playback-state",
+        "user-modify-playback-state",
+        "user-read-currently-playing",
         "user-read-email",
         "user-library-read",
         "user-read-recently-played",
@@ -31,6 +35,9 @@ export default function LoginScreen() {
         "playlist-read-private",
         "playlist-read-collaborative",
         "playlist-modify-public",
+        "playlist-modify-private",
+        "user-follow-modify",
+        "user-follow-read",
       ],
       // To follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false

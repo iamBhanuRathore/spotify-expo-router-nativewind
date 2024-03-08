@@ -28,7 +28,7 @@ const LikebarComponent = () => {
         numColumns={2}
         keyExtractor={(item, index) => String(index)}
         renderItem={({ item, index }) => (
-          <Pressable className="bg-zinc-700 flex-row gap-x-4 overflow-hidden truncate items-center rounded-md flex-1 mx-4 my-2 ">
+          <Pressable className="bg-zinc-700 overflow-hidden flex-row gap-x-4 items-center rounded-md flex-1 mx-4 my-2 ">
             <Image
               height={65}
               width={65}
@@ -37,7 +37,12 @@ const LikebarComponent = () => {
                 uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8j1phplfUkt-F1EAB3ieH1liY7MD_GvOg3Q&usqp=CAU",
               }}
             />
-            <Text className="text-white text-lg ">{item.name}</Text>
+            <Text
+              ellipsizeMode="clip"
+              numberOfLines={1}
+              className="text-white text-lg ">
+              {item.name}
+            </Text>
           </Pressable>
         )}
       />

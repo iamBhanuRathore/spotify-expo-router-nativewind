@@ -96,10 +96,15 @@ export default function Page() {
           <LikebarComponent />
           {/* Likebar Component  */}
           {/* Recent Played Component  */}
-          <RecentPlayed />
+          <View className="p-5">
+            <RecentPlayed />
+          </View>
           {/* Recent Played Component  */}
           {/* GetTopItems GetTopItems Component  */}
-          <GetTopItems type="artists" />
+          <View className="p-3">
+            <Text className="text-zinc-300 text-2xl ">Your Top Artists</Text>
+            <GetTopItems type="artists" />
+          </View>
           {/* GetTopItems GetTopItems Component  */}
           {/* </View> */}
         </ScrollView>

@@ -118,8 +118,8 @@ const dummyData = {
 const RecentPlayed = () => {
   // const [token, setToken] = useState("");
   const { data, isLoading, isError } = useRecentPlayedSongs();
-  console.log({ data, isLoading, isError });
-  const tracks = data?.items.length ? data?.items : dummyData.items;
+  // console.log({ data, isLoading, isError });
+  const tracks = data?.items?.length ? data?.items : dummyData.items;
   // const init = async () => {
   //   let a = await AsyncStorage.getItem("accessToken");
   //   console.log(a);
