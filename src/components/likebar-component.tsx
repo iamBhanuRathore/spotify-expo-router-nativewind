@@ -1,5 +1,7 @@
 import React from "react";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { router } from "expo-router";
 const secondTabBar = [
   {
     name: "Liked Songs",
@@ -28,15 +30,27 @@ const LikebarComponent = () => {
         numColumns={2}
         keyExtractor={(item, index) => String(index)}
         renderItem={({ item, index }) => (
-          <Pressable className="bg-zinc-700 overflow-hidden flex-row gap-x-4 items-center rounded-md flex-1 mx-4 my-2 ">
-            <Image
-              height={65}
-              width={65}
-              resizeMode="cover"
-              source={{
-                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8j1phplfUkt-F1EAB3ieH1liY7MD_GvOg3Q&usqp=CAU",
-              }}
-            />
+          <Pressable
+            onPress={() =>
+              item.name === "Liked Songs"
+                ? router.navigate("/(main)/liked")
+                : ""
+            }
+            className="bg-zinc-700 overflow-hidden flex-row gap-x-4 items-center rounded-md flex-1 mx-4 my-2 ">
+            {item.name === "Liked Songs" ? (
+              <View className="w-[65px] flex items-center justify-center h-[65px]">
+                <AntDesign name="heart" size={30} color="white" />
+              </View>
+            ) : (
+              <Image
+                height={65}
+                width={65}
+                resizeMode="cover"
+                source={{
+                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8j1phplfUkt-F1EAB3ieH1liY7MD_GvOg3Q&usqp=CAU",
+                }}
+              />
+            )}
             <Text
               ellipsizeMode="clip"
               numberOfLines={1}

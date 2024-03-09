@@ -96,7 +96,8 @@ export default function Page() {
           <LikebarComponent />
           {/* Likebar Component  */}
           {/* Recent Played Component  */}
-          <View className="p-5">
+          <View className="p-3">
+            <Text className="text-zinc-300 text-2xl ">Recently Played</Text>
             <RecentPlayed />
           </View>
           {/* Recent Played Component  */}
@@ -105,8 +106,10 @@ export default function Page() {
             <Text className="text-zinc-300 text-2xl ">Your Top Artists</Text>
             <GetTopItems type="artists" />
           </View>
-          {/* GetTopItems GetTopItems Component  */}
-          {/* </View> */}
+          {/* <View className="p-3">
+            <Text className="text-zinc-300 text-2xl ">Recently Played</Text>
+            <GetTopItems key="tracks" type="tracks" />
+          </View> */}
         </ScrollView>
         {/* <Button title="Logout" onPress={handleLogout} /> */}
       </LinearGradient>

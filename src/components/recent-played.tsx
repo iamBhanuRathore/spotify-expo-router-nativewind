@@ -1,7 +1,14 @@
 import { useRecentPlayedSongs } from "@/services/queries";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, Pressable, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 const dummyData = {
   href: "string",
   limit: 0,
@@ -116,45 +123,58 @@ const dummyData = {
   ],
 };
 const RecentPlayed = () => {
-  // const [token, setToken] = useState("");
   const { data, isLoading, isError } = useRecentPlayedSongs();
-  // console.log({ data, isLoading, isError });
   const tracks = data?.items?.length ? data?.items : dummyData.items;
-  // const init = async () => {
-  //   let a = await AsyncStorage.getItem("accessToken");
-  //   console.log(a);
-  //   setToken(a);
-  // };
-  // useEffect(() => {
-  //   init();
-  // }, []);
+
   return (
     <View>
       <FlatList
         data={tracks}
-        numColumns={2}
+        // numColumns={2}
+        keyExtractor={(item, index) => String(index)}
+        horizontal
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <Pressable className="flex-1 flex-row justify-between my-3 mx-2 bg-zinc-800 rounded-md overflow-hidden">
-            <Image
-              source={{
-                uri: item.track.album.images[0].url,
-              }}
-              height={55}
-              width={55}
-              // height={item.track.album.images[0].height}
-              // width={item.track.album.images[0].width}
-            />
-            <View className="flex-1 justify-center pl-4">
-              <Text numberOfLines={1} className="font-bold text-white">
-                {item.track.name}
-              </Text>
-            </View>
-          </Pressable>
+          <RecentPlayedCard item={item} />
+          // <Pressable className="flex-1 flex-row justify-between my-3 mx-2 bg-zinc-800 rounded-md overflow-hidden">
+          //   <Image
+          //     source={{
+          //       uri: item.track.album.images[0].url,
+          //     }}
+          //     height={55}
+          //     width={55}
+          //     // height={item.track.album.images[0].height}
+          //     // width={item.track.album.images[0].width}
+          //   />
+          //   <View className="flex-1 justify-center pl-4">
+          //     <Text numberOfLines={1} className="font-bold text-white">
+          //       {item.track.name}
+          //     </Text>
+          //   </View>
+          // </Pressable>
         )}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        // columnWrapperStyle={{ justifyContent: "space-between" }}
       />
     </View>
   );
 };
 
 export default RecentPlayed;
+
+export const RecentPlayedCard = ({ item }) => {
+  return (
+    <View className="m-3">
+      <TouchableOpacity className="">
+        <Image
+          source={{ uri: item.track.album.images[0].url }}
+          width={130}
+          height={130}
+          className="rounded-md"
+        />
+        <Text className="font-semibold text-zinc-300 mt-3">
+          {item.track.name}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};

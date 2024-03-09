@@ -24,6 +24,7 @@
     "expo-splash-screen": "~0.26.1",
     "expo-status-bar": "~1.11.1",
     "expo-web-browser": "^12.8.2",
+    "lucide-react": "^0.352.0",
     "nativewind": "^4.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
